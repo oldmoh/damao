@@ -1,0 +1,32 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'assets/scss/theme.scss';
+
+.container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  padding: 4rem;
+  width: 100%;
+}
+
+.tags {
+  width: 100%;
+
+  @media (min-width: map-get($grid-breakpoints, 'md' )) {
+    width: 80%;
+  }
+}
+
+.badge {
+  background-color: $theme-color;
+}
+
+.badge-link {
+  color: whitesmoke;
+  font-size: 1rem;
+  font-weight: 400;
+  &:hover {
+    color: rgba($color: white, $alpha: 0.5);
+  }
+}

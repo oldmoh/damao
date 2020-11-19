@@ -1,0 +1,77 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'assets/scss/theme.scss';
+@import 'assets/scss/markdown.scss';
+
+.post {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 4rem 2rem;
+  max-width: 100%;
+
+  @media (min-width: map-get($grid-breakpoints, 'md' )) {
+    margin: 4rem auto;
+  }
+}
+
+.article {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  width: 100%;
+
+  @media (min-width: map-get($grid-breakpoints, 'md' )) {
+    width: 1rem * 50;
+  }
+}
+
+.title {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.subtitle {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 2rem;
+
+  & p {
+    color: #aaaaaa;
+    margin: 0;
+  }
+
+  & span {
+    border-right: #aaaaaa 1px solid;
+    height: 0.75rem;
+    margin: 0 0.5rem;
+  }
+}
+
+.content {
+  width: 100%;
+}
+
+.divider {
+  width: 100%;
+}
+
+.tags {
+  width: 100%;
+}
+
+.badge {
+  background-color: $theme-color;
+  color: $text-color;
+}
+
+.badge-link {
+  color: $text-color;
+  font-size: 0.75rem;
+  &:hover {
+    color: rgba($color: #ffffff, $alpha: 0.5);
+  }
+}

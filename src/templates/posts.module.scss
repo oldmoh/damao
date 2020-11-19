@@ -1,0 +1,11 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+
+.content {
+  margin: 1.5rem;
+  max-width: 100%;
+  @media (min-width: map-get($grid-breakpoints ,'lg' )) {
+    margin: 1.5rem auto;
+    max-width: 1rem * 50;
+  }
+}

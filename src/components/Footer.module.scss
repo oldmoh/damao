@@ -1,0 +1,12 @@
+.footer {
+  align-items: center;
+  background-color: #dddddd;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  height: 6rem;
+
+  & p {
+    margin: 0;
+  }
+}

@@ -1,0 +1,12 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+
+.about {
+  & h1,
+  p {
+    width: 100%;
+    @media (min-width: map-get($grid-breakpoints, 'md' )) {
+      width: 50 * 1rem;
+    }
+  }
+}
