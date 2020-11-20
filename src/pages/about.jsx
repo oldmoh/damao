@@ -10,9 +10,9 @@ import style from './about.module.scss'
 const About = ({ data }) => {
   return (
     <Layout>
-      <SEO title="關於大貓" />
+      <SEO title="關於" />
       <Jumbotron className={style.about}>
-        <h1>關於大貓</h1>
+        <h1>關於</h1>
         <p>{data.about.content}</p>
       </Jumbotron>
     </Layout>

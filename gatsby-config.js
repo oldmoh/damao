@@ -1,15 +1,15 @@
 require('dotenv').config({
-  path: `.env.${process.env.NODE_ENV}`
+  path: `.env.${process.env.NODE_ENV}`,
 })
 
 module.exports = {
   siteMetadata: {
     title: '大貓日誌',
-    titleTemplate: "%s | 大貓日誌",
+    titleTemplate: '%s | 大貓日誌',
     author: 'oldmoh',
     description: '這裡是大貓的日誌，記錄著大貓的學習筆記和生活點滴。',
     url: `https://damao.page`,
-    image: "/src/assets/images/website-icon.png", // Path to your image you placed in the 'static' folder
+    image: '/src/assets/images/website-icon.png', // Path to your image you placed in the 'static' folder
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -17,8 +17,8 @@ module.exports = {
       resolve: 'gatsby-source-filesystem',
       options: {
         name: 'images',
-        path: `${__dirname}/src/assets/images`
-      }
+        path: `${__dirname}/src/assets/images`,
+      },
     },
     'gatsby-transformer-sharp',
     'gatsby-plugin-sharp',
@@ -38,32 +38,23 @@ module.exports = {
       resolve: `gatsby-source-strapi`,
       options: {
         apiURL: process.env.API_URL,
-        contentTypes: [
-          `category`,
-          `post`,
-          `tag`,
-          `user`
-        ],
-        singleTypes: [
-          `index`,
-          `about-me`,
-          `profile`
-        ],
+        contentTypes: [`category`, `post`, `tag`, `user`],
+        singleTypes: [`index`, `about-me`, `profile`],
         queryLimit: 1000,
         loginData: {
           identifier: process.env.STRAPI_ID,
-          password: process.env.STRAPI_PWD
-        }
-      }
+          password: process.env.STRAPI_PWD,
+        },
+      },
     },
     {
       resolve: 'gatsby-plugin-sass',
       options: {
-        includePaths: [`node_modules`, `src`]
-      }
+        includePaths: [`node_modules`, `src`],
+      },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
-    'gatsby-plugin-offline',
+    // 'gatsby-plugin-offline',
   ],
 }
