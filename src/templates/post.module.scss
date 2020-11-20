@@ -1,18 +1,16 @@
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
-@import 'assets/scss/theme.scss';
-@import 'assets/scss/markdown.scss';
+@import 'assets/scss/theme';
+@import 'assets/scss/markdown';
 
 .post {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin: 4rem 2rem;
+  margin: 1.5rem;
   max-width: 100%;
 
-  @media (min-width: map-get($grid-breakpoints, 'md' )) {
-    margin: 4rem auto;
+  @media (min-width: map-get($grid-breakpoints ,'lg' )) {
+    margin: 1.5rem auto;
+    padding: 0 1.5rem;
+    max-width: 1rem * 50;
   }
 }
 
@@ -22,10 +20,6 @@
   flex-direction: column;
   justify-content: flex-start;
   width: 100%;
-
-  @media (min-width: map-get($grid-breakpoints, 'md' )) {
-    width: 1rem * 50;
-  }
 }
 
 .title {

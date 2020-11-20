@@ -6,7 +6,7 @@ import style from './card.module.scss'
 
 const PostCard = ({ title, created_at, content, slug, preface }) => {
   return (
-    <Card className="m-4">
+    <Card className="mb-3">
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>{new Date(created_at).toDateString()}</Card.Subtitle>

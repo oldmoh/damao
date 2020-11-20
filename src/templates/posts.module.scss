@@ -6,6 +6,7 @@
   max-width: 100%;
   @media (min-width: map-get($grid-breakpoints ,'lg' )) {
     margin: 1.5rem auto;
+    padding: 0 1.5rem;
     max-width: 1rem * 50;
   }
 }

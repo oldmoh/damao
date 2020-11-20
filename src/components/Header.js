@@ -33,7 +33,7 @@ const Header = () => {
   const navItems = data.allStrapiCategory.nodes.map((node) => (
     <Nav.Item key={node.slug}>
       <Link
-        className={classnames('nav-link', style.link)}
+        className={classnames('nav-link p-2', style.link)}
         to={`/category/${node.slug}`}
       >
         {node.name}
@@ -45,7 +45,7 @@ const Header = () => {
     <header className={style.header}>
       <div className={style.inner}>
         <Img
-          className={classnames(style.profile, 'mb-5')}
+          className={classnames(style.profile, 'mb-3')}
           fixed={data.strapiProfile.profile.childImageSharp.fixed}
           alt="my profile"
         />
@@ -56,28 +56,34 @@ const Header = () => {
       </div>
       <Nav className="">
         <Nav.Item key="index">
-          <Link className={classnames('nav-link', style.link)} to="/">
+          <Link className={classnames('nav-link p-2', style.link)} to="/">
             Home
           </Link>
         </Nav.Item>
         {navItems}
         <Nav.Item key="about">
-          <Link className={classnames('nav-link', style.link)} to="/about">
+          <Link className={classnames('nav-link p-2', style.link)} to="/about">
             關於
           </Link>
         </Nav.Item>
         <Nav.Item key="tags">
-          <Link className={classnames('nav-link', style.link)} to="/tags">
+          <Link className={classnames('nav-link p-2', style.link)} to="/tags">
             標籤
           </Link>
         </Nav.Item>
         <Nav.Item key="timeline">
-          <Link className={classnames('nav-link', style.link)} to="/processing">
+          <Link
+            className={classnames('nav-link p-2', style.link)}
+            to="/processing"
+          >
             時間線
           </Link>
         </Nav.Item>
         <Nav.Item key="search">
-          <Link className={classnames('nav-link', style.link)} to="/processing">
+          <Link
+            className={classnames('nav-link p-2', style.link)}
+            to="/processing"
+          >
             搜尋
           </Link>
         </Nav.Item>
