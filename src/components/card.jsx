@@ -9,7 +9,9 @@ const PostCard = ({ title, created_at, content, slug, preface }) => {
     <Card className="mb-3">
       <Card.Body>
         <Card.Title>{title}</Card.Title>
-        <Card.Subtitle>{new Date(created_at).toDateString()}</Card.Subtitle>
+        <Card.Subtitle>
+          {new Date(created_at).toISOString().split('T')[0]}
+        </Card.Subtitle>
         <Card.Text>{preface}</Card.Text>
         <Link className="card-link" to={`/post/${slug}`}>
           Learn More

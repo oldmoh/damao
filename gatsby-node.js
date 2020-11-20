@@ -8,161 +8,163 @@
 crypto = require('crypto')
 
 exports.createPages = async ({ graphql, actions }) => {
-    const { createPage } = actions
-    const result = await graphql(`
+  const { createPage } = actions
+  const result = await graphql(`
     {
-        categories: allStrapiCategory(sort: {order: DESC, fields: posts___created_at}) {
-            nodes {
-                name
-                slug
-                posts {
-                    category
-                    content
-                    preface
-                    slug
-                    title
-                    published_at(locale: "")
-                    updated_at(locale: "")
-                    created_at(locale: "")
-                }
-            }
-            totalCount
+      categories: allStrapiCategory(
+        sort: { order: DESC, fields: posts___created_at }
+      ) {
+        nodes {
+          name
+          slug
+          posts {
+            category
+            content
+            preface
+            slug
+            title
+            published_at(locale: "")
+            updated_at(locale: "")
+            created_at(locale: "")
+          }
         }
+        totalCount
+      }
 
-        tags: allStrapiTag(sort: {order: DESC, fields: posts___created_at}) {
-            nodes {
-                name
-                slug
-                posts {
-                    category
-                    content
-                    preface
-                    slug
-                    title
-                    published_at(locale: "")
-                    updated_at(locale: "")
-                    created_at(locale: "")
-                }
-            }
-            totalCount
+      tags: allStrapiTag(sort: { order: DESC, fields: posts___created_at }) {
+        nodes {
+          name
+          slug
+          posts {
+            category
+            content
+            preface
+            slug
+            title
+            published_at(locale: "")
+            updated_at(locale: "")
+            created_at(locale: "")
+          }
         }
-        
-        posts: allStrapiPost (sort: {order: DESC, fields: created_at}){
-            nodes {
-                content
-                id
-                slug
-                title
-                published_at(locale: "")
-                updated_at(locale: "")
-                created_at(locale: "")
-                category {
-                  name
-                  slug
-                }
-                tags {
-                    name
-                    slug
-                }
-                preface
-            }
+        totalCount
+      }
+
+      posts: allStrapiPost(sort: { order: DESC, fields: created_at }) {
+        nodes {
+          content
+          id
+          slug
+          title
+          published_at(locale: "")
+          updated_at(locale: "")
+          created_at(locale: "")
+          category {
+            name
+            slug
+          }
+          tags {
+            name
+            slug
+          }
+          preface
         }
+      }
     }
-    `)
+  `)
 
-    if (result.errors) {
-        throw result.errors
-    }
+  if (result.errors) {
+    throw result.errors
+  }
 
-    const categories = result.data.categories.nodes
+  const categories = result.data.categories.nodes
 
-    categories.forEach((category, index) => {
-        createPage({
-            path: `/category/${category.slug}`,
-            component: require.resolve("./src/templates/posts.jsx"),
-            context: category
-        })
+  categories.forEach((category, index) => {
+    createPage({
+      path: `/category/${category.slug}`,
+      component: require.resolve('./src/templates/posts.jsx'),
+      context: category,
     })
+  })
 
-    const posts = result.data.posts.nodes
+  const posts = result.data.posts.nodes
 
-    posts.forEach((post, index) => {
-        createPage({
-            path: `/post/${post.slug}`,
-            component: require.resolve("./src/templates/post.jsx"),
-            context: post
-        })
+  posts.forEach((post, index) => {
+    createPage({
+      path: `/post/${post.slug}`,
+      component: require.resolve('./src/templates/post.jsx'),
+      context: post,
     })
+  })
 
-    const tags = result.data.tags.nodes
+  const tags = result.data.tags.nodes
 
-    tags.forEach((tag, index) => {
-        createPage({
-            path: `/tag/${tag.slug}`,
-            component: require.resolve("./src/templates/posts.jsx"),
-            context: tag
-        })
+  tags.forEach((tag, index) => {
+    createPage({
+      path: `/tag/${tag.slug}`,
+      component: require.resolve('./src/templates/posts.jsx'),
+      context: tag,
     })
+  })
 }
 
 require('dotenv').config({
-    path: `.env.${process.env.NODE_ENV}`,
+  path: `.env.${process.env.NODE_ENV}`,
 })
 const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 exports.onCreateNode = async ({
-    node,
-    actions,
-    store,
-    getCache,
-    createNodeId,
+  node,
+  actions,
+  store,
+  getCache,
+  createNodeId,
 }) => {
-    const { createNode } = actions
+  const { createNode } = actions
 
-    if (node.internal.type === 'StrapiIndex') {
-        let images = node.images
+  if (node.internal.type === 'StrapiIndex') {
+    let images = node.images
 
-        if (images.length > 0) {
-            const imageNodes = await Promise.all(
-                images.map((image) =>
-                    createRemoteFileNode({
-                        url: `${image.url}`,
-                        parentNodeId: node.id,
-                        store,
-                        getCache,
-                        createNode,
-                        createNodeId,
-                        ext: image.ext,
-                    })
-                )
-            )
+    if (images.length > 0) {
+      const imageNodes = await Promise.all(
+        images.map((image) =>
+          createRemoteFileNode({
+            url: `${image.url}`,
+            parentNodeId: node.id,
+            store,
+            getCache,
+            createNode,
+            createNodeId,
+            ext: image.ext,
+          })
+        )
+      )
 
-            images.forEach((image, i) => {
-                image.localFile___NODE = imageNodes[i].id
-            })
-        }
+      images.forEach((image, i) => {
+        image.localFile___NODE = imageNodes[i].id
+      })
     }
+  }
 
-    if (node.internal.type === 'StrapiProfile') {
-        let images = node.profile
+  if (node.internal.type === 'StrapiProfile') {
+    let images = node.profile
 
-        if (images.length > 0) {
-            const imageNodes = await Promise.all(
-                images.map((image) =>
-                    createRemoteFileNode({
-                        url: `${image.url}`,
-                        parentNodeId: node.id,
-                        store,
-                        getCache,
-                        createNode,
-                        createNodeId,
-                        ext: image.ext,
-                    })
-                )
-            )
+    if (images.length > 0) {
+      const imageNodes = await Promise.all(
+        images.map((image) =>
+          createRemoteFileNode({
+            url: `${image.url}`,
+            parentNodeId: node.id,
+            store,
+            getCache,
+            createNode,
+            createNodeId,
+            ext: image.ext,
+          })
+        )
+      )
 
-            images.forEach((image, i) => {
-                image.localFile___NODE = imageNodes[i].id
-            })
-        }
+      images.forEach((image, i) => {
+        image.localFile___NODE = imageNodes[i].id
+      })
     }
+  }
 }

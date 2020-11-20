@@ -34,9 +34,15 @@ const Post = ({ pageContext, ...data }) => {
             {pageContext.title}
           </h1>
           <div className={style.subtitle}>
-            <p>{new Date(pageContext.created_at).toDateString()}</p>
-            <span></span>
-            <p>{pageContext.category.name}</p>
+            <p>
+              發表於{' '}
+              {new Date(pageContext.created_at).toISOString().split('T')[0]}
+            </p>
+            <p>
+              最後修改於{' '}
+              {new Date(pageContext.updated_at).toISOString().split('T')[0]}
+            </p>
+            <p>分類於 {pageContext.category.name}</p>
           </div>
           <div className={style.conent}>
             <p>{pageContext.preface}</p>
