@@ -18,13 +18,9 @@ exports.createPages = async ({ graphql, actions }) => {
           name
           slug
           posts {
-            category
-            content
             preface
             slug
             title
-            published_at(locale: "")
-            updated_at(locale: "")
             created_at(locale: "")
           }
         }
@@ -36,37 +32,18 @@ exports.createPages = async ({ graphql, actions }) => {
           name
           slug
           posts {
-            category
-            content
             preface
             slug
             title
-            published_at(locale: "")
-            updated_at(locale: "")
             created_at(locale: "")
           }
         }
         totalCount
       }
 
-      posts: allStrapiPost(sort: { order: DESC, fields: created_at }) {
+      posts: allStrapiPost {
         nodes {
-          content
-          id
           slug
-          title
-          published_at(locale: "")
-          updated_at(locale: "")
-          created_at(locale: "")
-          category {
-            name
-            slug
-          }
-          tags {
-            name
-            slug
-          }
-          preface
         }
       }
     }
@@ -145,26 +122,18 @@ exports.onCreateNode = async ({
   }
 
   if (node.internal.type === 'StrapiProfile') {
-    let images = node.profile
-
-    if (images.length > 0) {
-      const imageNodes = await Promise.all(
-        images.map((image) =>
-          createRemoteFileNode({
-            url: `${image.url}`,
-            parentNodeId: node.id,
-            store,
-            getCache,
-            createNode,
-            createNodeId,
-            ext: image.ext,
-          })
-        )
-      )
-
-      images.forEach((image, i) => {
-        image.localFile___NODE = imageNodes[i].id
+    let profile = node.profile
+    if (profile) {
+      const profileNode = await createRemoteFileNode({
+        url: `${profile.url}`,
+        parentNodeId: node.id,
+        store,
+        getCache,
+        createNode,
+        createNodeId,
+        ext: profile.ext,
       })
+      profile.localFile___NODE = profileNode.id
     }
   }
 }

@@ -1,6 +1,6 @@
 import React from 'react'
 import classNames from 'classnames'
-import { Link } from 'gatsby'
+import { Link, graphql } from 'gatsby'
 import { Badge } from 'react-bootstrap'
 import ReactMarkdown from 'react-markdown'
 import gfm from 'remark-gfm'
@@ -9,8 +9,9 @@ import SEO from '../components/seo.jsx'
 import Layout from '../components/layout'
 import style from './post.module.scss'
 
-const Post = ({ pageContext, ...data }) => {
-  const badges = pageContext.tags.map((tag) => (
+const Post = ({ data }) => {
+  let post = data.strapiPost
+  const badges = post.tags.map((tag) => (
     <Badge
       key={tag.slug}
       className={classNames(style.badge, 'mx-1', 'px-2', 'py-1')}
@@ -23,33 +24,27 @@ const Post = ({ pageContext, ...data }) => {
 
   return (
     <Layout>
-      <SEO
-        title={pageContext.title}
-        description={pageContext.preface}
-        isArticle={true}
-      />
+      <SEO title={post.title} description={post.preface} isArticle={true} />
       <div className={classNames(style.post)}>
         <article className={style.article}>
           <h1 className={classNames(style.title, 'mt-4', 'mb-0')}>
-            {pageContext.title}
+            {post.title}
           </h1>
           <div className={style.subtitle}>
             <p>
-              發表於{' '}
-              {new Date(pageContext.created_at).toISOString().split('T')[0]}
+              發表於 {new Date(post.created_at).toISOString().split('T')[0]}
             </p>
             <p>
-              最後修改於{' '}
-              {new Date(pageContext.updated_at).toISOString().split('T')[0]}
+              最後修改於 {new Date(post.updated_at).toISOString().split('T')[0]}
             </p>
-            <p>分類於 {pageContext.category.name}</p>
+            <p>分類於 {post.category.name}</p>
           </div>
           <div className={style.conent}>
-            <p>{pageContext.preface}</p>
+            <p>{post.preface}</p>
             <ReactMarkdown
               className={style.markdown}
               plugins={[gfm]}
-              children={pageContext.content}
+              children={post.content}
             />
           </div>
           <hr className={style.divider} />
@@ -61,3 +56,26 @@ const Post = ({ pageContext, ...data }) => {
 }
 
 export default Post
+
+export const query = graphql`
+  query($slug: String) {
+    strapiPost(slug: { eq: $slug }) {
+      content
+      id
+      slug
+      title
+      published_at(locale: "")
+      updated_at(locale: "")
+      created_at(locale: "")
+      category {
+        name
+        slug
+      }
+      tags {
+        name
+        slug
+      }
+      preface
+    }
+  }
+`
