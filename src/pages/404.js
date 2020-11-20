@@ -1,12 +1,17 @@
 import React from 'react'
-import Helmet from 'react-helmet'
+
+import SEO from '../components/seo.jsx'
 import Layout from '../components/layout'
 
 const NotFoundPage = () => (
   <Layout>
-    <div id="main">
-      <h1>NOT FOUND</h1>
-      <p>You just hit a route that doesn&#39;t exist... the sadness.</p>
+    <SEO title="Not Found" />
+    <div>
+      <h1 className="m-4 text-center">NOT FOUND🚧</h1>
+      <p className="m-2 text-center">來到了不存在的路徑... 哭哭.</p>
+      <p className="m-2 text-center">
+        You just hit a route that doesn&#39;t exist... the sadness.
+      </p>
     </div>
   </Layout>
 )

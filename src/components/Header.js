@@ -1,84 +1,85 @@
 import React from 'react'
 import { useStaticQuery, graphql, Link } from 'gatsby'
-import Img from "gatsby-image"
-import classnames from "classnames";
+import Img from 'gatsby-image'
+import classnames from 'classnames'
 
 import { Nav } from 'react-bootstrap'
 import style from './Header.module.scss'
 
 const Header = () => {
   const data = useStaticQuery(graphql`
-  query {
-    profile: file(relativePath: {eq: "oldmoh.jpg"}) {
-      childImageSharp {
-        fixed(width: 150){
-          ...GatsbyImageSharpFixed
-        }
-      }
-    } 
-    background: file(relativePath: {eq: "castle.jpg"}) {
-      childImageSharp {
-        fluid{
-          ...GatsbyImageSharpFluid
-        }
-      }
-    } 
-    strapiProfile {
-      name 
-      description
-      profile {
+    query {
+      strapiProfile {
         name
-        childImageSharp {
-          fixed(width: 150){
-            ...GatsbyImageSharpFixed
+        description
+        profile {
+          name
+          childImageSharp {
+            fixed(width: 150) {
+              ...GatsbyImageSharpFixed
+            }
           }
         }
       }
-    }
-    allStrapiCategory {
-      nodes {
-        name
-        slug
+      allStrapiCategory {
+        nodes {
+          name
+          slug
+        }
       }
     }
-  }
   `)
 
-  const navItems = data.allStrapiCategory.nodes.map(node => (
+  const navItems = data.allStrapiCategory.nodes.map((node) => (
     <Nav.Item key={node.slug}>
-      <Link className={classnames('nav-link', style.link)} to={`/category/${node.slug}`}>
+      <Link
+        className={classnames('nav-link', style.link)}
+        to={`/category/${node.slug}`}
+      >
         {node.name}
       </Link>
     </Nav.Item>
-  )
-  )
+  ))
 
   return (
     <header className={style.header}>
       <div className={style.inner}>
-        <Img className={classnames(style.profile, 'mb-5')}
-          fixed={data.strapiProfile.profile.childImageSharp.fixed} alt="my profile" />
-        <h1 className={classnames(style.description)}>
+        <Img
+          className={classnames(style.profile, 'mb-5')}
+          fixed={data.strapiProfile.profile.childImageSharp.fixed}
+          alt="my profile"
+        />
+        <div className={classnames(style.description)}>
           <strong>{data.strapiProfile.name}</strong>
           <p>{data.strapiProfile.description}</p>
-        </h1>
+        </div>
       </div>
       <Nav className="">
         <Nav.Item key="index">
-          <Link className={classnames('nav-link', style.link)} to="/">Home</Link>
+          <Link className={classnames('nav-link', style.link)} to="/">
+            Home
+          </Link>
         </Nav.Item>
         {navItems}
         <Nav.Item key="about">
-          <Link className={classnames('nav-link', style.link)} to="/about">關於</Link>
+          <Link className={classnames('nav-link', style.link)} to="/about">
+            關於
+          </Link>
         </Nav.Item>
         <Nav.Item key="tags">
-          <Link className={classnames('nav-link', style.link)} to="/tags">標籤</Link>
+          <Link className={classnames('nav-link', style.link)} to="/tags">
+            標籤
+          </Link>
         </Nav.Item>
         <Nav.Item key="timeline">
-          <Link className={classnames('nav-link', style.link)} to="/processing">時間線</Link>
+          <Link className={classnames('nav-link', style.link)} to="/processing">
+            時間線
+          </Link>
         </Nav.Item>
         <Nav.Item key="search">
-          <Link className={classnames('nav-link', style.link)} to="/processing">搜尋</Link>
+          <Link className={classnames('nav-link', style.link)} to="/processing">
+            搜尋
+          </Link>
         </Nav.Item>
       </Nav>
     </header>

@@ -10,7 +10,6 @@
   height: 100%;
   width: 100%;
   padding: 4.5rem 1.5rem;
-  // background-color: #1f1815;
   background-color: $theme-color;
   position: relative;
 
@@ -37,27 +36,22 @@
 }
 
 .description {
-  color: rgba(255, 255, 255, 0.5);
-  font-size: 1.35rem;
-  font-weight: 400;
-  line-height: 2rem;
+  font-size: 1rem;
   text-align: center;
-  margin: 1rem 0;
-
-  @media (min-width: map-get($grid-breakpoints, 'md' )) {
-    font-size: 1.35rem;
-  }
-
-  @media (min-width: map-get($grid-breakpoints, 'lg' )) {
-    font-size: 1.25rem;
-    text-align: right;
-  }
 
   & strong {
     color: white;
+    display: block;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+
+    @media (min-width: map-get($grid-breakpoints, 'md' )) {
+      margin-bottom: 1rem;
+    }
   }
 
   & p {
+    color: rgba(255, 255, 255, 0.5);
     margin: 0;
   }
 }

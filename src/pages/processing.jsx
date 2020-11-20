@@ -1,16 +1,17 @@
 import React from 'react'
-import { Jumbotron } from 'react-bootstrap'
+
+import SEO from '../components/seo.jsx'
 import Layout from '../components/layout'
 
-const ProcessingPage = ({}) => {
-  return (
-    <Layout>
-      <Jumbotron>
-        <h1>Oops🚧🚧🚧</h1>
-        <p>這裡是有預定功能的頁面，但是還在開發中...👨🏻‍💻👨🏻‍💻👨🏻‍💻</p>
-      </Jumbotron>
-    </Layout>
-  )
-}
+const ProcessingPage = () => (
+  <Layout>
+    <SEO title="開發中" />
+    <div>
+      <h1 className="m-4 text-center">Oops🚧🚧🚧</h1>
+      <p className="m-2 text-center">努力開發中...👨‍💻👨‍💻👨‍💻</p>
+      <p className="m-2 text-center">Developing...👨‍💻👨‍💻👨‍💻</p>
+    </div>
+  </Layout>
+)
 
 export default ProcessingPage
