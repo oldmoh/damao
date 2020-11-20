@@ -2,11 +2,10 @@
 @import 'bootstrap/scss/variables';
 
 .about {
-  & h1,
-  p {
-    width: 100%;
-    @media (min-width: map-get($grid-breakpoints, 'md' )) {
-      width: 50 * 1rem;
-    }
+  margin: 1.5rem;
+  max-width: 100%;
+  @media (min-width: map-get($grid-breakpoints ,'lg' )) {
+    margin: 1.5rem auto;
+    max-width: 1rem * 50;
   }
 }

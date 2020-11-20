@@ -1,8 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
 
-import { Jumbotron } from 'react-bootstrap'
-
 import SEO from '../components/seo.jsx'
 import Layout from '../components/layout'
 import style from './about.module.scss'
@@ -10,11 +8,13 @@ import style from './about.module.scss'
 const About = ({ data }) => {
   return (
     <Layout>
-      <SEO title="關於" />
-      <Jumbotron className={style.about}>
-        <h1>關於</h1>
-        <p>{data.about.content}</p>
-      </Jumbotron>
+      <SEO title="關於" description={data.about.about_site} />
+      <div className={style.about}>
+        <h2>關於大貓日誌</h2>
+        <p>{data.about.about_site}</p>
+        <h2>關於大貓</h2>
+        <p>{data.about.about_me}</p>
+      </div>
     </Layout>
   )
 }
@@ -24,8 +24,8 @@ export default About
 export const query = graphql`
   {
     about: strapiAboutMe {
-      content
-      published_at
+      about_me
+      about_site
     }
   }
 `

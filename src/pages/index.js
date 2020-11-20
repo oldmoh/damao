@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-import Img from "gatsby-image"
+import Img from 'gatsby-image'
 
 import { Carousel } from 'react-bootstrap'
 import SEO from '../components/seo.jsx'
@@ -9,7 +9,9 @@ import PostCard from '../components/card.jsx'
 import style from './index.module.scss'
 
 const HomeIndex = ({ data }) => {
-  const posts = data.allStrapiPost.nodes.map(post => <PostCard key={post.slug} {...post} />)
+  const posts = data.allStrapiPost.nodes.map((post) => (
+    <PostCard key={post.slug} {...post} />
+  ))
 
   const carouselItems = data.strapiIndex.images.map((image) => (
     <Carousel.Item key={image.name}>
@@ -25,12 +27,13 @@ const HomeIndex = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={data.strapiIndex.site_name} />
+      <SEO
+        title={data.strapiIndex.site_name}
+        description={data.strapiIndex.description}
+      />
 
       <div className={style.content}>
-        <Carousel className="mt-4 mb-5">
-          {carouselItems}
-        </Carousel>
+        <Carousel className="mt-4 mb-5">{carouselItems}</Carousel>
 
         <section className="mt-4 mb-5">
           <h2>Posts</h2>
@@ -45,9 +48,10 @@ const HomeIndex = ({ data }) => {
 export default HomeIndex
 
 export const query = graphql`
-{
- strapiIndex {
+  {
+    strapiIndex {
       site_name
+      description
       images {
         name
         caption
@@ -61,13 +65,13 @@ export const query = graphql`
         }
       }
     }
-  allStrapiPost(sort: {order: DESC, fields: created_at}) {
-    nodes {
-      created_at(locale: "")
-      slug
-      title
-      preface
+    allStrapiPost(sort: { order: DESC, fields: created_at }) {
+      nodes {
+        created_at(locale: "")
+        slug
+        title
+        preface
+      }
     }
   }
-}
 `

@@ -7,7 +7,8 @@ module.exports = {
     title: '大貓日誌',
     titleTemplate: '%s | 大貓日誌',
     author: 'oldmoh',
-    description: '這裡是大貓的日誌，記錄著大貓的學習筆記和生活點滴。',
+    description:
+      '在這裡紀錄著作為 Web Developer 的日本生活體驗和開發紀錄，同時期望可以為正在尋求資訊的人提供一點提示或幫助。',
     url: `https://damao.page`,
     image: '/src/assets/images/website-icon.png', // Path to your image you placed in the 'static' folder
   },
