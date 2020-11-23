@@ -1,5 +1,5 @@
 require('dotenv').config({
-  path: `.env.development`,
+  path: `.env.${process.env.NODE_ENV}`,
 })
 
 module.exports = {
@@ -11,6 +11,7 @@ module.exports = {
       '在這裡紀錄著作為 Web Developer 的日本生活體驗和開發紀錄，同時期望可以為正在尋求資訊的人提供一點提示或幫助。',
     url: `https://damao.page`,
     image: '/src/assets/images/website-icon.png', // Path to your image you placed in the 'static' folder
+    siteUrl: `https://damao.page`
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -65,5 +66,6 @@ module.exports = {
         pluginConfig: {},
       },
     },
+    `gatsby-plugin-sitemap`
   ],
 }
