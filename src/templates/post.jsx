@@ -33,7 +33,7 @@ const Post = ({ data }) => {
         children.findIndex((item) => item.type.displayName === 'image') !== -1
       )
         return children
-      else return ReactMarkdown.renderers.text({ children, ...props })
+      else return <p>{children}</p>
     },
     image: ({ ...props }) => (
       <MarkdownImage sourceImages={post.images} {...props} />
