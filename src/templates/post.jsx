@@ -13,16 +13,27 @@ import style from './post.module.scss'
 const Post = ({ data }) => {
   let post = data.strapiPost
   const renderers = {
-    // remove wrapper P tag of images
-    paragraph: ({ ...props }) => {
-      if (
-        props.children.length !== 0 &&
-        props.children.findIndex(
-          (item) => item.type.displayName === 'image'
-        ) !== -1
+    link: ({ href, children }) => {
+      if (href.startsWith('#')) return <Link to={href}>{children}</Link>
+      else return <a href={href}>{children}</a>
+    },
+    heading: ({ node, level, children }) => {
+      let id = node.children.reduce(
+        (acc, child) =>
+          acc + child.value.replace(/ /g, '-').toLocaleLowerCase(),
+        ''
       )
-        return props.children
-      else return <p>{props.children}</p>
+      const TagName = `h${level}`
+      return <TagName id={id}>{children}</TagName>
+    },
+    // remove wrapper P tag of images
+    paragraph: ({ children, ...props }) => {
+      if (
+        children.length !== 0 &&
+        children.findIndex((item) => item.type.displayName === 'image') !== -1
+      )
+        return children
+      else return ReactMarkdown.renderers.text({ children, ...props })
     },
     image: ({ ...props }) => (
       <MarkdownImage sourceImages={post.images} {...props} />
