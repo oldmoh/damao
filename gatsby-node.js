@@ -97,7 +97,10 @@ exports.onCreateNode = async ({
 }) => {
   const { createNode } = actions
 
-  if (node.internal.type === 'StrapiIndex') {
+  if (
+    node.internal.type === 'StrapiIndex' ||
+    node.internal.type === 'StrapiPost'
+  ) {
     let images = node.images
 
     if (images.length > 0) {

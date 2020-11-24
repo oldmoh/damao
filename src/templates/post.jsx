@@ -7,10 +7,27 @@ import gfm from 'remark-gfm'
 
 import SEO from '../components/seo.jsx'
 import Layout from '../components/layout'
+import MarkdownImage from '../components/markdownImage'
 import style from './post.module.scss'
 
 const Post = ({ data }) => {
   let post = data.strapiPost
+  const renderers = {
+    // remove wrapper P tag of images
+    paragraph: ({ ...props }) => {
+      if (
+        props.children.length !== 0 &&
+        props.children.findIndex(
+          (item) => item.type.displayName === 'image'
+        ) !== -1
+      )
+        return props.children
+      else return <p>{props.children}</p>
+    },
+    image: ({ ...props }) => (
+      <MarkdownImage sourceImages={post.images} {...props} />
+    ),
+  }
   const badges = post.tags.map((tag) => (
     <Badge
       key={tag.slug}
@@ -45,6 +62,7 @@ const Post = ({ data }) => {
               className={style.markdown}
               plugins={[gfm]}
               children={post.content}
+              renderers={renderers}
             />
           </div>
           <hr className={style.divider} />
@@ -76,6 +94,17 @@ export const query = graphql`
         slug
       }
       preface
+      images {
+        caption
+        url
+        localFile {
+          childImageSharp {
+            fluid {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
     }
   }
 `
