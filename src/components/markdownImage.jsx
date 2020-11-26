@@ -1,15 +1,27 @@
 import React from 'react'
+import { useStaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
 const MarkdownImage = ({ sourceImages, clickEvent, ...props }) => {
-  const image = sourceImages.find((item) => item.url === props.node.url)
+  const data = useStaticQuery(graphql`
+    query {
+      file(name: { eq: "no-image" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
   const handleClick = clickEvent ? clickEvent : () => {}
+  const image = sourceImages.find((item) => item.url === props.node.url)
+  const fluidImage = image
+    ? image.localFile.childImageSharp.fluid
+    : data.file.childImageSharp.fluid
+
   return (
-    <Img
-      fluid={image.localFile.childImageSharp.fluid}
-      alt={props.node.alt}
-      title={props.node.title}
-    />
+    <Img fluid={fluidImage} alt={props.node.alt} title={props.node.title} />
   )
 }
 
