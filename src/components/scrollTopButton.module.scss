@@ -1,0 +1,36 @@
+@import 'bootstrap/scss/functions';
+@import 'bootstrap/scss/variables';
+@import 'assets/scss/theme';
+
+.container {
+  position: fixed;
+  bottom: -100%;
+  right: 1rem;
+  z-index: 100;
+  transition: bottom 0.5s ease-in-out;
+}
+
+.show {
+  bottom: 1rem;
+}
+
+.button {
+  background-color: $theme-color;
+  border: none;
+  border-radius: 2px;
+  height: 32px;
+  width: 32px;
+  padding: 0;
+  margin: 0;
+
+  & polygon {
+    fill: white;
+    transition: fill 0.1s linear;
+  }
+
+  &:hover {
+    & polygon {
+      fill: black;
+    }
+  }
+}

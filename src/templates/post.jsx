@@ -8,6 +8,7 @@ import gfm from 'remark-gfm'
 import SEO from '../components/seo.jsx'
 import Layout from '../components/layout'
 import MarkdownImage from '../components/markdownImage'
+import ScrollTopButton from '../components/scrollTopButton'
 import style from './post.module.scss'
 
 const Post = ({ data }) => {
@@ -79,6 +80,7 @@ const Post = ({ data }) => {
           <hr className={style.divider} />
           <div className={style.tags}>{badges}</div>
         </article>
+        <ScrollTopButton />
       </div>
     </Layout>
   )
