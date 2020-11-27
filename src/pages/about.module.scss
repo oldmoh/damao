@@ -1,7 +1,6 @@
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
 @import 'assets/scss/theme';
-@import 'assets/scss/animations';
 
 .about {
   margin: 1.5rem;
@@ -25,7 +24,6 @@
 .activity {
   border-bottom: gray 1px dotted;
   margin-top: 2rem;
-  animation: floatup 0.8s linear;
 
   &::before {
     content: '';

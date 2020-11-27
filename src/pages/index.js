@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
@@ -6,12 +6,17 @@ import { Carousel } from 'react-bootstrap'
 import SEO from '../components/seo.jsx'
 import Layout from '../components/layout'
 import PostCard from '../components/card.jsx'
+import Animation from '../components/animation'
 import style from './index.module.scss'
 
 const HomeIndex = ({ data }) => {
-  const posts = data.allStrapiPost.nodes.map((post) => (
-    <PostCard key={post.slug} {...post} />
+  const [show, setShow] = useState(false)
+  const posts = data.allStrapiPost.nodes.map((post, index) => (
+    <Animation key={post.slug} play={show} delay={index * 200}>
+      <PostCard {...post} />
+    </Animation>
   ))
+  useEffect(() => setShow(true), [])
 
   const carouselItems = data.strapiIndex.images.map((image) => (
     <Carousel.Item key={image.name}>
@@ -19,9 +24,6 @@ const HomeIndex = ({ data }) => {
         fluid={image.localFile.childImageSharp.fluid}
         alt={image.alternativeText}
       />
-      <Carousel.Caption>
-        <h3>{image.caption}</h3>
-      </Carousel.Caption>
     </Carousel.Item>
   ))
 

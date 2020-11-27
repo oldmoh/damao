@@ -1,7 +1,6 @@
 @import 'bootstrap/scss/functions';
 @import 'bootstrap/scss/variables';
 @import 'assets/scss/theme';
-@import 'assets/scss/animations';
 
 .archives {
   margin: 1.5rem;
@@ -26,7 +25,6 @@
   border-bottom: gray 1px dotted;
   margin-top: 2rem;
   position: relative;
-  animation: floatup 0.5s linear;
 
   &::before {
     content: '';

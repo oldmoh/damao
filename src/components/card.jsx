@@ -1,12 +1,13 @@
 import React from 'react'
 import { Link } from 'gatsby'
 import { Card } from 'react-bootstrap'
+import classnames from 'classnames'
 
 import style from './card.module.scss'
 
-const PostCard = ({ title, created_at, content, slug, preface }) => {
+const PostCard = ({ title, created_at, content, slug, preface, ...props }) => {
   return (
-    <Card className="mb-3">
+    <Card {...props} className={classnames('mb-3', props.className)}>
       <Card.Body>
         <Card.Title>{title}</Card.Title>
         <Card.Subtitle>
