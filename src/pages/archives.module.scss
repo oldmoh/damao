@@ -3,7 +3,7 @@
 @import 'assets/scss/theme';
 @import 'assets/scss/animations';
 
-.about {
+.archives {
   margin: 1.5rem;
   max-width: 100%;
   @media (min-width: map-get($grid-breakpoints ,'lg' )) {
@@ -18,25 +18,31 @@
 }
 
 .timeline {
-  padding: 1rem 0;
+  padding: 1rem 0 2rem;
   border-left: lightgray 4px solid;
 }
 
 .activity {
   border-bottom: gray 1px dotted;
   margin-top: 2rem;
-  animation: floatup 0.8s linear;
+  position: relative;
+  animation: floatup 0.5s linear;
 
   &::before {
     content: '';
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: -0.375rem;
-    margin-right: 1rem;
+    display: block;
     background-color: $theme-color;
     border-width: 1rem;
     border-radius: 50%;
     height: 0.5rem;
     width: 0.5rem;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    transform: translate(-75%, -50%);
+  }
+
+  & p {
+    margin: 0 1rem;
   }
 }

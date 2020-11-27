@@ -71,12 +71,12 @@ const Header = () => {
             標籤
           </Link>
         </Nav.Item>
-        <Nav.Item key="timeline">
+        <Nav.Item key="archives">
           <Link
             className={classnames('nav-link p-2', style.link)}
-            to="/processing"
+            to="/archives"
           >
-            時間線
+            歸檔
           </Link>
         </Nav.Item>
         <Nav.Item key="search">
