@@ -13,7 +13,7 @@
   background-color: $theme-color;
   position: relative;
 
-  @media (min-width: map-get($grid-breakpoints, 'md' )) {
+  @media (min-width: map-get($grid-breakpoints, 'xl' )) {
     align-items: flex-end;
     padding: 2.5rem 4rem;
   }
@@ -41,7 +41,7 @@
     font-weight: 400;
     margin-bottom: 0.5rem;
 
-    @media (min-width: map-get($grid-breakpoints, 'md' )) {
+    @media (min-width: map-get($grid-breakpoints, 'xl' )) {
       margin-bottom: 1rem;
     }
   }
