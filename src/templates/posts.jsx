@@ -8,11 +8,13 @@ import style from './posts.module.scss'
 
 const Posts = ({ pageContext, ...param }) => {
   const [show, setShow] = useState(false)
-  const posts = pageContext.posts.map((post, index) => (
-    <Animation key={post.slug} play={show} delay={index * 200}>
-      <PostCard {...post} />
-    </Animation>
-  ))
+  const posts = pageContext.posts
+    .sort((a, b) => -(Date.parse(a.created_at) - Date.parse(b.created_at)))
+    .map((post, index) => (
+      <Animation key={post.slug} play={show} delay={index * 200}>
+        <PostCard {...post} />
+      </Animation>
+    ))
   useEffect(() => setShow(true), [])
 
   return (
